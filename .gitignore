@@ -8,3 +8,4 @@ allure-results/
 .idea/
 .vscode/
 .DS_Store
+allure-report/
