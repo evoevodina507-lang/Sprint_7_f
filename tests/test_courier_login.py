@@ -1,6 +1,8 @@
 import allure
 import pytest
-from helpers import login_courier, MSG_NOT_FOUND, MSG_NOT_ENOUGH_DATA_LOGIN
+from api_methods import login_courier
+from data import MSG_NOT_FOUND, MSG_NOT_ENOUGH_DATA_LOGIN
+
 
 @allure.feature("Логин курьера")
 class TestCourierLogin:
@@ -33,7 +35,7 @@ class TestCourierLogin:
     def test_login_missing_field(self, courier, missing_field):
         body = {"login": courier["payload"]["login"], "password": courier["payload"]["password"]}
         body.pop(missing_field)
-        
+
         response = login_courier(body.get("login"), body.get("password"))
         assert response.status_code == 400
         assert response.json().get("message") == MSG_NOT_ENOUGH_DATA_LOGIN

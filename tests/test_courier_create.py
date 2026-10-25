@@ -1,9 +1,9 @@
 import allure
 import pytest
-from helpers import (
-    create_courier, delete_courier, login_courier, make_courier_payload,
-    MSG_COURIER_CREATED, MSG_LOGIN_BUSY, MSG_NOT_ENOUGH_DATA_CREATE
-)
+from helpers import make_courier_payload
+from api_methods import create_courier, delete_courier, login_courier
+from data import MSG_COURIER_CREATED, MSG_LOGIN_BUSY, MSG_NOT_ENOUGH_DATA_CREATE
+
 
 @allure.feature("Создание курьера")
 class TestCourierCreate:
@@ -11,11 +11,10 @@ class TestCourierCreate:
     def test_create_courier_success(self):
         payload = make_courier_payload()
         response = create_courier(payload)
-        
-        # Убран try/except
+
         assert response.status_code == 201
         assert response.json() == MSG_COURIER_CREATED
-        
+
         login_response = login_courier(payload["login"], payload["password"])
         delete_courier(login_response.json()["id"])
 

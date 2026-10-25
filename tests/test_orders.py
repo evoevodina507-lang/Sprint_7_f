@@ -1,6 +1,8 @@
 import allure
 import pytest
-from helpers import create_order, get_orders, make_order_payload
+from helpers import make_order_payload
+from api_methods import create_order, get_orders
+
 
 @allure.feature("Создание заказа")
 class TestOrderCreate:
@@ -19,6 +21,7 @@ class TestOrderCreate:
         body = response.json()
         assert "track" in body
         assert isinstance(body["track"], int)
+
 
 @allure.feature("Список заказов")
 class TestOrderList:

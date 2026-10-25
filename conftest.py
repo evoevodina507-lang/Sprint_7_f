@@ -1,5 +1,7 @@
 import pytest
-from helpers import create_courier, delete_courier, login_courier, make_courier_payload
+from helpers import make_courier_payload
+from api_methods import create_courier, delete_courier, login_courier
+
 
 @pytest.fixture
 def courier():
